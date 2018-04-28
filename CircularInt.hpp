@@ -29,6 +29,9 @@ class CircularInt{
     const CircularInt& operator*=(const CircularInt&);
     const CircularInt& operator/=(const CircularInt&);
     const CircularInt& operator%=(const CircularInt&);
+    const CircularInt& operator*=(const int&);
+    const CircularInt& operator/=(const int&);
+    const CircularInt& operator%=(const int&);
     friend const CircularInt operator/(const CircularInt&, const CircularInt&);
      friend const CircularInt operator/(const int, const CircularInt&);
     friend const CircularInt operator/(const CircularInt&,const int);
