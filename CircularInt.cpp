@@ -114,11 +114,20 @@ bool CircularInt:: operator==(int const other){
 bool CircularInt:: operator!=(CircularInt const& other){
     return this->hour!=other.hour;
 }
+bool CircularInt:: operator!=(int const& other){
+    return this->hour!=other;
+}
 bool CircularInt:: operator>(CircularInt const& other){
     return this->hour>other.hour;
 }
+bool CircularInt:: operator>(int const& other){
+    return this->hour>other;
+}
 bool CircularInt:: operator<(CircularInt const& other){
     return this->hour<other.hour;
+}
+bool CircularInt:: operator<(int const& other){
+    return this->hour<other;
 }
 bool CircularInt:: operator>=(CircularInt const& other){
     return this->hour>=other.hour;
