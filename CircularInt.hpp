@@ -33,7 +33,7 @@ class CircularInt{
     const CircularInt& operator/=(const int&);
     const CircularInt& operator%=(const int&);
     friend const CircularInt operator/(const CircularInt&, const CircularInt&);
-     friend const CircularInt operator/(const int, const CircularInt&);
+    friend const CircularInt operator/(const int, const CircularInt&);
     friend const CircularInt operator/(const CircularInt&,const int);
     friend const CircularInt operator- (const CircularInt&,const CircularInt&);
     friend const CircularInt operator- (const int,const CircularInt&);
@@ -60,6 +60,8 @@ class CircularInt{
     bool operator!= (int const&);
     friend bool operator<=(int const other,CircularInt const&);
     friend bool operator>=(int const other,CircularInt const&);
+    friend bool operator<(int const other,CircularInt const&);
+    friend bool operator>(int const other,CircularInt const&);
     bool operator> (CircularInt const&);
     bool operator< (CircularInt const&);
     bool operator> (int const&);
@@ -90,11 +92,17 @@ inline bool operator==(int const other,CircularInt const& c){
 inline bool operator!=(int const other,CircularInt const& c){
      return c.hour!=other;
 }
+inline bool operator>(int const other,CircularInt const& c){
+     return other>c.hour;
+}
+inline bool operator<(int const other,CircularInt const& c){
+     return other<c.hour;
+}
 inline bool operator>=(int const other,CircularInt const& c){
-     return c.hour>=other;
+     return other>=c.hour;
 }
 inline bool operator<=(int const other,CircularInt const& c){
-     return c.hour<=other;
+     return other<=c.hour;
 }
 inline istream&  operator>>(istream& input, CircularInt c){
     int temp;
@@ -208,12 +216,21 @@ inline const CircularInt operator/(const CircularInt& c1, const CircularInt& c2)
     return temp;
 }
 inline const CircularInt operator/(const CircularInt& c,const int other){
+       if(c.hour%other!=0)
+            throw string("There is no number x in {"+to_string(c.min)+","+to_string(c.max)+"} such that x*"+to_string(other)+"="+to_string(c.hour));
+
     CircularInt temp(c);
-    temp.hour=temp.hour/other;
-        while(temp.hour<temp.min)
-            temp.hour=temp.hour+(temp.max-temp.min+1);
-        while(temp.hour>temp.max)
-            temp.hour=temp.hour-(temp.max-temp.min+1);
+    bool flag=true;
+    int i=temp.min;
+        while(i<=temp.max && flag){
+            if(i*other == temp.hour){
+                temp.hour=i;
+                flag=false;
+            }
+            i++;
+        }
+             if(flag)
+        throw invalid_argument("THERE IS NO SUCH NUMBER!");
     return temp;
 }
 inline const CircularInt operator/(const int other,const CircularInt& c){
