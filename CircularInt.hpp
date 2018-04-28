@@ -115,8 +115,8 @@ inline istream&  operator>>(istream& input, CircularInt c){
 }
 
 inline ostream&  operator<< (ostream& out, CircularInt c){
-    out << c.hour;
-    return out;
+   return out << c.hour;
+  
 
 }
 inline const CircularInt operator- (const int other,const CircularInt& c){
