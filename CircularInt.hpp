@@ -37,7 +37,14 @@ class CircularInt{
     friend const CircularInt operator%(const CircularInt&, const CircularInt&);
     friend const CircularInt operator%(const int, const CircularInt&);
     friend const CircularInt operator%(const CircularInt&,const int);
+      friend const CircularInt operator^(const CircularInt&, const CircularInt&);
+    friend const CircularInt operator^(const int, const CircularInt&);
+    friend const CircularInt operator^(const CircularInt&,const int);
     friend ostream& operator<< (ostream& out, CircularInt);
+    friend istream& operator>> (istream& input, CircularInt);
+    friend  CircularInt operator>> (CircularInt , int const& );
+    friend  CircularInt operator<< (CircularInt , int const& );
+    friend  CircularInt operator& (CircularInt , int const& );
     friend bool operator==(int const other,CircularInt const&);
     bool operator== (CircularInt const&);
     bool operator==(int const other);
@@ -49,9 +56,34 @@ class CircularInt{
     bool operator! ();
     
 };
+inline CircularInt operator& (CircularInt c, int const& other){
+    CircularInt temp (c);
+    temp.hour = temp.hour & other;
+    return temp;
+}
+inline CircularInt operator<< (CircularInt c, int const& other){
+    CircularInt temp (c);
+    temp.hour = temp.hour << other;
+    return temp;
+}
+inline CircularInt operator>> (CircularInt c, int const& other){
+    CircularInt temp (c);
+    temp.hour = temp.hour >> other;
+    return temp;
+}
 inline bool operator==(int const other,CircularInt const& c){
      return c.hour==other;
 }
+inline istream&  operator>>(istream& input, CircularInt c){
+    int temp;
+    input>> temp;
+    if(temp>c.GetMax() || temp<c.GetMin())
+		throw std::invalid_argument( "The value is not in the range\n" );
+    c.setHour(temp);
+    return input;
+
+}
+
 inline ostream&  operator<< (ostream& out, CircularInt c){
     out << c.hour;
     return out;
@@ -218,5 +250,32 @@ inline const CircularInt operator% (const int other,const CircularInt& c){
     temp.hour=other%temp.hour;
         while(temp.hour<temp.min)
             temp.hour=temp.hour+(temp.max-temp.min+1);
+    return temp;
+}
+inline const CircularInt operator^(const CircularInt& c1, const CircularInt& c2){
+CircularInt temp(c1);
+    temp.hour=temp.hour^c2.hour;
+     while(temp.hour<temp.min)
+            temp.hour=temp.hour+(temp.max-temp.min+1);
+    while(temp.hour>temp.max)
+            temp.hour=temp.hour-(temp.max-temp.min+1);
+        return temp;
+}
+inline const CircularInt operator^ (const CircularInt& c,const int other){
+    CircularInt temp(c);
+    temp.hour=temp.hour^other;
+       while(temp.hour<temp.min)
+            temp.hour=temp.hour+(temp.max-temp.min+1);
+       while(temp.hour>temp.max)
+            temp.hour=temp.hour-(temp.max-temp.min+1);
+    return temp;
+}
+inline const CircularInt operator^(const int other,const CircularInt& c){
+    CircularInt temp(c);
+    temp.hour=other^temp.hour;
+        while(temp.hour<temp.min)
+            temp.hour=temp.hour+(temp.max-temp.min+1);
+        while(temp.hour>temp.max)
+            temp.hour=temp.hour-(temp.max-temp.min+1);
     return temp;
 }
