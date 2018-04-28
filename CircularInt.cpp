@@ -28,6 +28,20 @@ CircularInt& CircularInt:: operator+= (const CircularInt& other){
     }
     return *this;
 }
+CircularInt& CircularInt:: operator+= (const int& other){
+    this->hour=hour+other;
+    while(hour>max){
+        hour=hour-(max-min+1);
+    }
+    return *this;
+}
+CircularInt& CircularInt:: operator-= (const int& other){
+    this->hour=hour-other;
+    while(hour<min){
+        hour=hour+(max-min+1);
+    }
+    return *this;
+}
 CircularInt& CircularInt:: operator-= (const CircularInt& other){
     this->hour=hour-other.hour;
     while(hour<min){
