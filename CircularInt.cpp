@@ -55,6 +55,12 @@ const CircularInt& CircularInt:: operator=(const CircularInt& a){
 }
 const CircularInt& CircularInt:: operator=(const int& a){
     this->hour=a;
+        while(hour>max){
+        hour=hour-(max-min+1);
+    }
+    while(hour<min){
+        hour=hour+(max-min+1);
+    }
     return(*this);
 }
 CircularInt& CircularInt:: operator++ (){
