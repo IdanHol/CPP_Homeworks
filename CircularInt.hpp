@@ -14,6 +14,7 @@ class CircularInt{
     int GetMin() const;
     int GetMax() const;
     const CircularInt& operator=(const CircularInt&);
+    const CircularInt& operator=(const int&);
     CircularInt& operator+= (const CircularInt&);
     CircularInt& operator+= (const int&);
     CircularInt& operator-= (const int&);
