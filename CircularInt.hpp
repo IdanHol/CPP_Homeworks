@@ -15,6 +15,8 @@ class CircularInt{
     int GetMax() const;
     const CircularInt& operator=(const CircularInt&);
     CircularInt& operator+= (const CircularInt&);
+    CircularInt& operator+= (const int&);
+    CircularInt& operator-= (const int&);
     CircularInt& operator-= (const CircularInt&);
     CircularInt& operator++ ();
     CircularInt operator++ (int);
@@ -22,6 +24,7 @@ class CircularInt{
     CircularInt operator-- (int);
     friend const CircularInt operator+ (const CircularInt& ,const CircularInt&);
     friend const CircularInt operator+ (const int,const CircularInt&);
+    friend const CircularInt operator+ (const CircularInt&,const int);
     const CircularInt operator-();
     const CircularInt& operator*=(const CircularInt&);
     const CircularInt& operator/=(const CircularInt&);
@@ -31,6 +34,7 @@ class CircularInt{
     friend const CircularInt operator/(const CircularInt&,const int);
     friend const CircularInt operator- (const CircularInt&,const CircularInt&);
     friend const CircularInt operator- (const int,const CircularInt&);
+    friend const CircularInt operator- (const CircularInt&,const int);
     friend const CircularInt operator*(const CircularInt&, const CircularInt&);
      friend const CircularInt operator*(const int, const CircularInt&);
     friend const CircularInt operator*(const CircularInt&,const int);
@@ -107,9 +111,8 @@ inline ostream&  operator<< (ostream& out, CircularInt c){
 inline const CircularInt operator- (const int other,const CircularInt& c){
     CircularInt temp(c);
     temp.hour=other-temp.hour;
-        while(temp.hour<temp.min){
+        while(temp.hour<temp.min)
             temp.hour=temp.hour+(temp.max-temp.min+1);
-        }
     return temp;
 }
 inline const CircularInt operator-(const CircularInt& c1,const CircularInt& c2){
@@ -132,12 +135,25 @@ inline const CircularInt operator-(const CircularInt& c1,const CircularInt& c2){
     }
     return temp;
 }
+inline const CircularInt operator- (const CircularInt& c,const int other){
+ CircularInt temp(c);
+    temp.hour=other-temp.hour;
+        while(temp.hour<temp.min)
+            temp.hour=temp.hour+(temp.max-temp.min+1);
+    return temp;
+}
+inline const CircularInt operator+ (const CircularInt& c,const int other){
+CircularInt temp(c);
+    temp.hour=other+temp.hour;
+  while(temp.hour>temp.max)
+            temp.hour=temp.hour-(temp.max-temp.min+1);
+        return temp;
+}
 inline const CircularInt operator+ (const int other, const CircularInt& c){
 CircularInt temp(c);
     temp.hour=other+temp.hour;
-  while(temp.hour>temp.max){
+  while(temp.hour>temp.max)
             temp.hour=temp.hour-(temp.max-temp.min+1);
-        }
         return temp;
 }
 inline const CircularInt operator+ (const CircularInt& c1, const CircularInt& c2){
