@@ -82,6 +82,16 @@ const CircularInt& CircularInt:: operator*= (const CircularInt& a){
     }
     return *this;
 }
+const CircularInt& CircularInt:: operator%= (const CircularInt& a){
+    hour=hour%a.hour;
+    while(hour>max){
+        hour=hour-(max-min+1);
+    }
+    while(hour<min){
+        hour=hour+(max-min+1);
+    }
+    return *this;
+}
 const CircularInt& CircularInt:: operator/= (const CircularInt& a){
     if(this->hour%a.hour!=0)
             throw string("There is no number x in {"+to_string(this->min)+","+to_string(this->max)+"} such that x*"+to_string(a.hour)+"="+to_string(this->hour));
@@ -94,6 +104,7 @@ const CircularInt& CircularInt:: operator/= (const CircularInt& a){
     }
     return *this;
 }
+
 bool CircularInt:: operator==(CircularInt const& other){
     return this->hour==other.hour;
 }
