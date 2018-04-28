@@ -48,9 +48,15 @@ class CircularInt{
     friend bool operator==(int const other,CircularInt const&);
     bool operator== (CircularInt const&);
     bool operator==(int const other);
+    friend bool operator!=(int const other,CircularInt const&);
     bool operator!= (CircularInt const&);
+    bool operator!= (int const&);
+    friend bool operator<=(int const other,CircularInt const&);
+    friend bool operator>=(int const other,CircularInt const&);
     bool operator> (CircularInt const&);
     bool operator< (CircularInt const&);
+    bool operator> (int const&);
+    bool operator< (int const&);
     bool operator>= (CircularInt const&);
     bool operator<= (CircularInt const&);
     bool operator! ();
@@ -73,6 +79,15 @@ inline CircularInt operator>> (CircularInt c, int const& other){
 }
 inline bool operator==(int const other,CircularInt const& c){
      return c.hour==other;
+}
+inline bool operator!=(int const other,CircularInt const& c){
+     return c.hour!=other;
+}
+inline bool operator>=(int const other,CircularInt const& c){
+     return c.hour>=other;
+}
+inline bool operator<=(int const other,CircularInt const& c){
+     return c.hour<=other;
 }
 inline istream&  operator>>(istream& input, CircularInt c){
     int temp;
