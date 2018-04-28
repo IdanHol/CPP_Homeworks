@@ -148,7 +148,7 @@ inline const CircularInt operator-(const CircularInt& c1,const CircularInt& c2){
 }
 inline const CircularInt operator- (const CircularInt& c,const int other){
  CircularInt temp(c);
-    temp.hour=other-temp.hour;
+    temp.hour=temp.hour-other;
         while(temp.hour<temp.min)
             temp.hour=temp.hour+(temp.max-temp.min+1);
     return temp;
