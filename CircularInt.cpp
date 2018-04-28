@@ -54,7 +54,7 @@ const CircularInt& CircularInt:: operator=(const CircularInt& a){
     return(*this);
 }
 const CircularInt& CircularInt:: operator=(const int& a){
-    this->hour=a.;
+    this->hour=a;
     return(*this);
 }
 CircularInt& CircularInt:: operator++ (){
