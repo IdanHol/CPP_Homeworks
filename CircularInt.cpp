@@ -53,7 +53,10 @@ const CircularInt& CircularInt:: operator=(const CircularInt& a){
     this->hour=a.hour;
     return(*this);
 }
-
+const CircularInt& CircularInt:: operator=(const int& a){
+    this->hour=a.;
+    return(*this);
+}
 CircularInt& CircularInt:: operator++ (){
     hour=hour+1;
     if(hour>max){
